@@ -11,12 +11,7 @@
 #include "akordeak.h"
 
 /* Funtzioen prototipoak */
-int abestiaSortu(FILE *pfSarrera, FILE *pfIrteera, char *izenburua, int akordeakIdatzi);
-void latex_putc(FILE * Pfitxategia, char *karaktereak);
-void latex_verbatim_putc(FILE * Pfitxategia, char *karaktereak);
-void hasiVerbatim(FILE * pFitxategia);
-void bukatuVerbatim(FILE * pFitxategia);
-void izenburuaLatex(FILE * pFitxategia, char * izenburua);
+extern int abestiaSortu(FILE *pfSarrera, FILE *pfIrteera, char *izenburua, int akordeakIdatzi);
 void sortuPdf(char * fitxategia);
 int txtDa(const struct dirent *entry);
 
@@ -134,74 +129,6 @@ int main(int argc, char **argv)
   return (0);
 }
 
-
-/**
- * Hizki kate bat Latex eran idazten du fitxategi batean.
- *
- * @param pFitxategia Idatzi beharreko fitxategiari punteroa.
- * @param karaktereak Idatzi beharreko karaktereen katea.
- */
-void latex_putc(FILE * pFitxategia, char *karaktereak)
-{
-  if (!strcmp(karaktereak, "\n"))
-    fprintf(pFitxategia, "\\\\\n");
-  else if (!strcmp(karaktereak, "#"))
-    fprintf(pFitxategia, "\\#");
-  else if (!strcmp(karaktereak, "\flat"))
-    fprintf(pFitxategia, "$\\flat$");
-  else if (!strcmp(karaktereak, "á"))
-    fprintf(pFitxategia, "\\'a");
-  else if (!strcmp(karaktereak, "é"))
-    fprintf(pFitxategia, "\\'e");
-  else if (!strcmp(karaktereak, "í"))
-    fprintf(pFitxategia, "\\'i");
-  else if (!strcmp(karaktereak, "ó"))
-    fprintf(pFitxategia, "\\'o");
-  else if (!strcmp(karaktereak, "ú"))
-    fprintf(pFitxategia, "\\'u");
-  else
-    fprintf(pFitxategia, "%s", karaktereak);
-}
-
-/**
- * Hizki kate bat Latex eran idazten du fitxategi batean,
- * baina verbatim eran.
- *
- * @param pFitxategia Idatzi beharreko fitxategiari punteroa.
- * @param karaktereak Idatzi beharreko karaktereen katea.
- */
-void latex_verbatim_putc(FILE * pFitxategia, char *karaktereak)
-{
-  if (!strcmp(karaktereak, "á"))
-    fprintf(pFitxategia, "\\'a");
-  else if (!strcmp(karaktereak, "é"))
-    fprintf(pFitxategia, "\\'e");
-  else if (!strcmp(karaktereak, "í"))
-    fprintf(pFitxategia, "\\'i");
-  else if (!strcmp(karaktereak, "ó"))
-    fprintf(pFitxategia, "\\'o");
-  else if (!strcmp(karaktereak, "ú"))
-    fprintf(pFitxategia, "\\'u");
-  else if (!strcmp(karaktereak, "\flat"))
-    fprintf(pFitxategia, "$\\flat$");
-  else
-    fprintf(pFitxategia, "%s", karaktereak);
-}
-
-void hasiVerbatim(FILE * pFitxategia)
-{
-  fprintf(pFitxategia, "\\begin{verbatim}\n");
-}
-
-void bukatuVerbatim(FILE * pFitxategia)
-{
-  fprintf(pFitxategia, "\\end{verbatim}\n");
-}
-
-void izenburuaLatex(FILE * pFitxategia, char * izenburua)
-{
-  fprintf(pFitxategia, "\n\\section{%s}\n\n", izenburua);
-}
 
 void sortuPdf(char * fitxategia)
 {

@@ -10,6 +10,12 @@
 
 #include "akordeak.h"
 
+/* Funtzioen prototipoak */
+void hasiVerbatim(FILE * pFitxategia);
+void bukatuVerbatim(FILE * pFitxategia);
+void izenburuaLatex(FILE * pFitxategia, char * izenburua);
+void latex_putc(FILE * Pfitxategia, char *karaktereak);
+void latex_verbatim_putc(FILE * Pfitxategia, char *karaktereak);
 
 /**
  * Funtzio honek sarrerako fitxategi batetik irakurri eta irteerako
@@ -198,4 +204,73 @@ int abestiaSortu(FILE *pfSarrera, FILE *pfIrteera, char *izenburua, int akordeak
   fclose(pfHitzak);
 
   return (0);
+}
+
+
+void hasiVerbatim(FILE * pFitxategia)
+{
+  fprintf(pFitxategia, "\\begin{verbatim}\n");
+}
+
+void bukatuVerbatim(FILE * pFitxategia)
+{
+  fprintf(pFitxategia, "\\end{verbatim}\n");
+}
+
+void izenburuaLatex(FILE * pFitxategia, char * izenburua)
+{
+  fprintf(pFitxategia, "\n\\section{%s}\n\n", izenburua);
+}
+
+/**
+ * Hizki kate bat Latex eran idazten du fitxategi batean.
+ *
+ * @param pFitxategia Idatzi beharreko fitxategiari punteroa.
+ * @param karaktereak Idatzi beharreko karaktereen katea.
+ */
+void latex_putc(FILE * pFitxategia, char *karaktereak)
+{
+  if (!strcmp(karaktereak, "\n"))
+    fprintf(pFitxategia, "\\\\\n");
+  else if (!strcmp(karaktereak, "#"))
+    fprintf(pFitxategia, "\\#");
+  else if (!strcmp(karaktereak, "\flat"))
+    fprintf(pFitxategia, "$\\flat$");
+  else if (!strcmp(karaktereak, "á"))
+    fprintf(pFitxategia, "\\'a");
+  else if (!strcmp(karaktereak, "é"))
+    fprintf(pFitxategia, "\\'e");
+  else if (!strcmp(karaktereak, "í"))
+    fprintf(pFitxategia, "\\'i");
+  else if (!strcmp(karaktereak, "ó"))
+    fprintf(pFitxategia, "\\'o");
+  else if (!strcmp(karaktereak, "ú"))
+    fprintf(pFitxategia, "\\'u");
+  else
+    fprintf(pFitxategia, "%s", karaktereak);
+}
+
+/**
+ * Hizki kate bat Latex eran idazten du fitxategi batean,
+ * baina verbatim eran.
+ *
+ * @param pFitxategia Idatzi beharreko fitxategiari punteroa.
+ * @param karaktereak Idatzi beharreko karaktereen katea.
+ */
+void latex_verbatim_putc(FILE * pFitxategia, char *karaktereak)
+{
+  if (!strcmp(karaktereak, "á"))
+    fprintf(pFitxategia, "\\'a");
+  else if (!strcmp(karaktereak, "é"))
+    fprintf(pFitxategia, "\\'e");
+  else if (!strcmp(karaktereak, "í"))
+    fprintf(pFitxategia, "\\'i");
+  else if (!strcmp(karaktereak, "ó"))
+    fprintf(pFitxategia, "\\'o");
+  else if (!strcmp(karaktereak, "ú"))
+    fprintf(pFitxategia, "\\'u");
+  else if (!strcmp(karaktereak, "\flat"))
+    fprintf(pFitxategia, "$\\flat$");
+  else
+    fprintf(pFitxategia, "%s", karaktereak);
 }
