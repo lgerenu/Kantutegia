@@ -20,3 +20,6 @@
 # Exclude documentation
 *.html
 *.tex
+*.js
+*.png
+*.css
