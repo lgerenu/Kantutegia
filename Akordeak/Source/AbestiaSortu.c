@@ -206,17 +206,29 @@ int abestiaSortu(FILE *pfSarrera, FILE *pfIrteera, char *izenburua, int akordeak
   return (0);
 }
 
-
+/**
+ * Verbatimera hasi Latex-en.
+ * @param pFitxategia Idazteko erabili behar den fitxategiari erakuslea.
+ */
 void hasiVerbatim(FILE * pFitxategia)
 {
   fprintf(pFitxategia, "\\begin{verbatim}\n");
 }
 
+/**
+ * Verbatim era bukatu Latex-en.
+ * @param pFitxategia Idazteko erabili behar den fitxategiari erakuslea.
+ */
 void bukatuVerbatim(FILE * pFitxategia)
 {
   fprintf(pFitxategia, "\\end{verbatim}\n");
 }
 
+/**
+ * Izenburu bat sartu Latex fitxategi batean.
+ * @param pFitxategia Idazteko erabili behar den fitxategiari erakuslea.
+ * @param izenburua Idatzi beharreko izenburua.
+ */
 void izenburuaLatex(FILE * pFitxategia, char * izenburua)
 {
   fprintf(pFitxategia, "\n\\section{%s}\n\n", izenburua);

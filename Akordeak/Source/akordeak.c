@@ -130,6 +130,10 @@ int main(int argc, char **argv)
 }
 
 
+/**
+ * Latex fitxategitik habiatuta, PDF fitxategia sortzen du.
+ * @param fitxategia Sortuko den fitxategiaren izena.
+ */
 void sortuPdf(char * fitxategia)
 {
   char sysCommand[100];
@@ -143,6 +147,11 @@ void sortuPdf(char * fitxategia)
 }
 
 
+/**
+ * Scandir funtzioan erabiltzeko. Fitxategi bat .txt erakoa
+ * denentz erabakitzen du.
+ * @return FALSE, ez baldin bada .txt erako fitxategia. Bestela, beste edozein balio bueltatzen du.
+ */
 int txtDa(const struct dirent *entry)
 {
   char izena[100];
